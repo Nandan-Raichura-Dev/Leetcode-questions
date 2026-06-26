@@ -19,7 +19,7 @@ public:
         for(int length=n;length>=1;length--){// we will go largest length to the smallest, like we will just decrease the size of the string by one every time , n->0 it willsave many itreation, we will start from the hihest index
 
 
-            for(int start=0;length+start<=n;start++){
+            for(int start=0;length+start<=n;start++){// we used the length+start<=n becz we want to check evry time that does it lies under the substring size, 
 
                if(isPalindrome(s, start, start + length - 1)){// faster helper function to solve this
                     return s.substr(start, length); // Only copy the winner string ONCE
