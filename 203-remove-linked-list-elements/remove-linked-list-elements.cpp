@@ -29,9 +29,7 @@ public:
         while(currNode!=NULL){
             if(currNode->val==val){
                 prev->next=currNode->next;
-                ListNode* deleteNode = currNode;
                 currNode=currNode->next;
-                delete deleteNode;
             }
             else{
                 prev=currNode;
