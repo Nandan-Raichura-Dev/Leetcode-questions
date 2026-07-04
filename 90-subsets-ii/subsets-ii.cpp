@@ -4,7 +4,7 @@ public:
         ans.push_back(ds);
 
         for(int i=idx;i<nums.size();i++){
-            if(i!=idx && nums[i]==nums[i-1]){
+            if(i>idx && nums[i]==nums[i-1]){
                 continue;
             }// avoiding the duplicates only this thing  is changes from the subsets probelm
 
