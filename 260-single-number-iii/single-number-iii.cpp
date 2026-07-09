@@ -11,11 +11,12 @@ public:
             xxor=xxor^nums[i];
         }
 
-       long long rightMost = xxor & -xxor;
-        // we will get the right most set bit, we take it out to decide which number will be put in the bucket 1 or 2
+        long rightMost=(xxor&(xxor-1))^xxor;// we will get the right most set bit, we take it out to decide which number will be put in the bucket 1 or 2
 
-        int b1=0;
-        int  b2=0; 
+       
+       int b1=0;
+       int b2=0;
+       
         for(int i=0;i<nums.size();i++){
             if(nums[i]&rightMost){// to check in the nums that the 1st bit is set or  and if it is non zero num we will store it in the b1 else in b2
             b1=b1^nums[i]; 
