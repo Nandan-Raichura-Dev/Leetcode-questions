@@ -1,55 +1,46 @@
-class Solution {// here in brut eforce we will use nse and pse, becz we weant to keep track of the bar thatr are the equal or the bigger then the size so we will make our range of the rectangle uintil we not found the nse or pse, so we can stop there
+class Solution {// brute by taking out nse and pse and arr[i]*nse-pse
 public:
-        // to find the next smaller elemeent
-    vector<int> findNse(vector<int> &arr){
-        int n=arr.size();
-        vector<int> ans(n);
-
-        stack<int> s;
-
-        for(int i=n-1;i>=0;i--){
-            while(!s.empty() && arr[s.top()]>=arr[i]){
-                s.pop();
-            }
-            ans[i]=!s.empty()?s.top():n;
-            s.push(i);
-        }
-        return ans;
-    }
-
-    vector<int> findPse(vector<int> &arr){
-      
-        int n=arr.size();
-          vector<int> ans(n);
-
-        stack<int> s;
-
-        for(int i=0;i<n;i++){
-            while(!s.empty() && arr[s.top()]>arr[i]){
-                s.pop();
-            }
-            ans[i]=!s.empty()?s.top():-1;
-            s.push(i);
-        }
-
-        return ans;
-    }
-
     int largestRectangleArea(vector<int>& heights) {
-        vector<int> nextSmall=findNse(heights);
-        vector<int> prevSmall=findPse(heights);
-
+        stack<int> s;
         int n=heights.size();
 
         long long maxi=0;
-
+// only caluculating the pse , and while poping out the element we will process that and take out the area for that
         for(int i=0;i<n;i++){
-            int left=prevSmall[i];
-            int right=nextSmall[i];
+            while(!s.empty() && heights[s.top()]>heights[i]){
+                    long element=heights[s.top()];// element to be processed
 
-            long long val=(long long)(right-left-1)*heights[i];// area of the rectangle 
+                    s.pop();
+                    int nse=i;//current element , in which are standing at 
 
-            maxi=max(maxi,val);
+                    int pse=!s.empty()?s.top():-1;
+            
+                    long long val = (long long)element * (nse - pse - 1);
+
+                     maxi=max(maxi,val);// we are checking when we are coming back for poping out the element , becz at that time we really know that we have the nse, becz we have trvalled further
+
+
+
+            }
+            s.push(i);
+        }
+
+        // if the element is still left over, beca these element do not have nse
+
+        while(!s.empty()){
+            int element=heights[s.top()];
+
+            s.pop();
+
+            int nse=n;
+
+            int pse=!s.empty()?s.top():-1;
+            
+           long long val = (long long)element * (nse - pse - 1);
+
+            maxi=max(maxi,val);// we are checking when we are coming back for poping out the element , becz at that time we really know that we have the nse, becz we have trvalled further
+
+
 
         }
 
