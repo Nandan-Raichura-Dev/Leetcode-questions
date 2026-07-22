@@ -1,18 +1,24 @@
-class Solution {// same probelm as the binary subarray with sum
+class Solution {
 public:
+    int atMost(vector<int>& nums, int k){
+        if(k<0) return 0;
+        int l=0,r=0,sum=0,cnt=0;
+
+        while(r<nums.size()){
+            sum+=nums[r]%2;
+
+            while(sum>k){
+                sum-=nums[l]%2;
+                l++;
+            }
+
+            cnt=cnt+(r-l+1);
+            r++;
+        }
+        return cnt; // returns raw atMost(k), no subtraction here
+    }
+
     int numberOfSubarrays(vector<int>& nums, int k) {
-       map<int,int> hash;
-      hash[0]=1;// intially storeing 
-      int sum=0;
-      int cnt=0;
-
-      for(int i=0;i<nums.size();i++){
-        sum+=nums[i]%2;
-        int diff=sum-k;
-        cnt+=hash[diff];
-        hash[sum]++;
-      }
-
-    return cnt;
+        return atMost(nums,k) - atMost(nums,k-1); // single subtraction, done once
     }
 };
