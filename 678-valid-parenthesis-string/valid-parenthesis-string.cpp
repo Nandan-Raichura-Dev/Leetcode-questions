@@ -32,3 +32,49 @@ public:
         return false;
     }
 };
+
+
+
+// recursive approch
+// class Solution {
+// public:
+//     // index -> current position in string
+//     // openCount -> number of unmatched '(' so far
+//     bool solve(string &s, int index, int openCount){
+        
+//         // if at any point open count goes negative, 
+//         // it means too many ')' with nothing to match -> invalid
+//         if(openCount < 0){
+//             return false;
+//         }
+
+//         // reached end of string, valid only if everything is matched
+//         if(index == s.size()){
+//             return openCount == 0;
+//         }
+
+//         char ch = s[index];
+
+//         if(ch == '('){
+//             // must open a bracket
+//             return solve(s, index+1, openCount+1);
+//         }
+//         else if(ch == ')'){
+//             // must close a bracket
+//             return solve(s, index+1, openCount-1);
+//         }
+//         else{
+//             // ch == '*', try all 3 possibilities
+//             bool asOpen  = solve(s, index+1, openCount+1); // treat * as '('
+//             bool asClose = solve(s, index+1, openCount-1); // treat * as ')'
+//             bool asEmpty = solve(s, index+1, openCount);   // treat * as ""
+
+//             // valid if ANY of the 3 choices works
+//             return asOpen || asClose || asEmpty;
+//         }
+//     }
+
+//     bool checkValidString(string s) {
+//         return solve(s, 0, 0);
+//     }
+// };
