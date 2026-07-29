@@ -10,7 +10,11 @@ public:
                 return false;
             }
 
+            if(i>=nums.size()){
+                return true;
+            }
             maxIdx=max(maxIdx,nums[i]+i);
+
         }
 
         return true;
