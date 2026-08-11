@@ -13,7 +13,7 @@ class Solution {
 public:
     vector<vector<int>> finalAns;
 
-    void helper(TreeNode* root,int targetSum,int sum,vector<int>preAns){
+    void helper(TreeNode* root,int targetSum,int sum,vector<int>&preAns){
         if(root==NULL){
             return;
         }
@@ -30,7 +30,8 @@ public:
         helper(root->left,targetSum,sum,preAns);
         helper(root->right,targetSum,sum ,preAns);
 
-      
+        sum-=root->val;
+        preAns.pop_back();
     }
     
 
